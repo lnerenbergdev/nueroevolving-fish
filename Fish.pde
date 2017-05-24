@@ -2,7 +2,10 @@ Creature[] fish;
 Creature[] newFish;
 float[][][][] newWeight;
 
-PVector[] Food = new PVector[5];
+int numberOfFood = 5;
+int numberOfAncestors = 4;
+
+PVector[] Food = new PVector[numberOfFood];
 int F;
 
 int k = 0;
@@ -31,6 +34,7 @@ void setup(){
   for(int i = 0; i < initialP.length; i++){
     initialParent[i] = float(initialP[i]);
   }
+  
   newWeight = new float[25][2][4][4];
   newWeight = initializeWeights(25,2,4,4,initialParent);
   fish = new Creature[2];
@@ -86,7 +90,7 @@ void draw(){
       }
     }
   }
-  if(numLiving(fish) < 7 && evolving == true){
+  if(numLiving(fish) < 5 && evolving == true){
     for(int i = 0; i < fish.length; i++){
       if(fish[i].isLiving()){
         Parent[n%5] = fish[i].brain.getWeights();
@@ -94,7 +98,7 @@ void draw(){
       }
     }
   }
-  if(numLiving(fish) < 2 && evolving == true){
+  if(numLiving(fish) < 1 && evolving == true){
     background(0);
     //output.println(Time);
     fish = NewFish(crossOver(Parent, 25));
